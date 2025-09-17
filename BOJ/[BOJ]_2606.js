@@ -29,7 +29,7 @@ for (let i = 0; i < pairNum; i++) {
   graph[m].push(n);
 }
 
-let visited = Array.from(comNum + 1).fill(false);
+let visited = Array(comNum + 1).fill(false);
 
 function dfs(start) {
   visited[start] = true;
