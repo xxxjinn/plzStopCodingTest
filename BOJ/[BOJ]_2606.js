@@ -14,17 +14,15 @@ comNum = Number(comNum);
 pairNum = Number(pairNum);
 
 let count = 0;
-let graph = [[]];
+let graph = [];
+
+for (let i = 0; i <= comNum; i++) {
+  graph.push([]);
+}
 
 for (let i = 0; i < pairNum; i++) {
   let [n, m] = input[i].split(" ").map(Number);
 
-  if (!graph[n]) {
-    graph[n] = [];
-  }
-  if (!graph[m]) {
-    graph[m] = [];
-  }
   graph[n].push(m);
   graph[m].push(n);
 }
