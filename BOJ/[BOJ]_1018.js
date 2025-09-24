@@ -39,7 +39,7 @@ function countRepaint(y, x) {
   return Math.min(repaintW, repaintB);
 }
 
-for (let y = 0; j <= m - 8; y++) {
+for (let y = 0; y <= m - 8; y++) {
   for (let x = 0; x <= n - 8; x++) {
     min = Math.min(min, countRepaint(y, x));
   }
@@ -52,3 +52,6 @@ console.log(min);
 // 첫 칸이 W인 경우와 B인 경우를 동시에 계산하는지 궁금했었는데
 
 // 첫 칸의 색을 바꿨을 때 나머지를 다시 색칠하는 경우가 더 적을 수 있어서!
+
+/** 배열을 인덱스로 생각해서 규칙 찾아내기 */
+/** for문 활용하기 */
