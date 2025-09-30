@@ -1,32 +1,56 @@
 //그룹 단어 체커
+//실버5
+//40분 소요
+
 let fs = require("fs");
 let path = process.platform === "linux" ? "/dev/stdin" : "input.txt";
 let [n, ...input] = fs.readFileSync(path).toString().trim().split("\n");
 
-let answer = 0;
+let count = n;
 
-for (let i = 0; i < n; i++) {
-  let arr = input[i].split("");
-  let current = arr[0];
-  let set = new Set();
-  set.add(current);
-
+for (let i = 0; i < input.length; i++) {
+  let str = input[i];
+  let arr = [];
   let flag = true;
+  for (let j = 0; j < str.length; j++) {
+    let char = str[j];
+    let nextChar = str[j + 1];
 
-  for (let j = 1; j < arr.length; j++) {
-    if (set.has(arr[j])) {
-      if (current !== arr[j]) {
-        flag = false;
-        break;
-      }
+    if (arr.includes(char)) {
+      if (char === nextChar) continue;
+      flag = false;
+      break;
     }
-    if (current !== arr[j]) {
-      set.add(arr[j]);
-      current = arr[j];
+
+    if (char !== nextChar) {
+      arr.push(char);
     }
   }
-
-  if (flag) answer++;
+  if (!flag) count--;
 }
 
-console.log(answer);
+console.log(count);
+
+//더 간단한 버전
+//includes는 배열 길이가 길어지면 비효율적이게 됨
+
+let count2 = 0;
+
+for (let word of input) {
+  let set = new Set();
+  let prev = "";
+  let flag = true;
+
+  for (let char of word) {
+    if (char !== prev && set.has(char)) {
+      flag = false;
+      break;
+    }
+    set.add(char);
+    prev = char;
+  }
+
+  if (flag) count2++;
+}
+
+console.log(count2);
