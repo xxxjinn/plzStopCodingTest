@@ -1,22 +1,25 @@
-//OX퀴즈 - 브2
-//10분 소요
+// OX퀴즈 - 브2
+// 15분 소요
 
 let fs = require("fs");
 let path = process.platform === "linux" ? "/dev/stdin" : "input.txt";
-let [n, ...input] = fs.readFileSync(path).toString().trim().split("\n");
+let [t, ...input] = fs.readFileSync(path).toString().trim().split("\n");
 
-for (let i = 0; i < n; i++) {
-  let number = 0;
+for (let i = 0; i < t; i++) {
+  let arr = input[i];
+
   let answer = 0;
+  let count = 1;
+  for (let j = 0; j < arr.length; j++) {
+    let cur = arr[j];
 
-  const currentStr = input[i];
-
-  for (let j = 0; j < currentStr.length; j++) {
-    const cur = currentStr[j];
-
-    if (cur === "O") number++;
-    else number = 0;
-    answer += number;
+    answer += count;
+    if (cur === "X") {
+      answer -= count;
+      count = 1;
+      continue;
+    }
+    count++;
   }
   console.log(answer);
 }
