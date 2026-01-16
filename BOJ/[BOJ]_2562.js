@@ -1,10 +1,11 @@
-//최댓값 - 브3
-//1분
+//최댓값 - 브론즈3
+//1분 소요
 
 let fs = require("fs");
 let path = process.platform === "linux" ? "/dev/stdin" : "input.txt";
 let input = fs.readFileSync(path).toString().trim().split("\n").map(Number);
 
 let max = Math.max(...input);
+
 console.log(max);
 console.log(input.indexOf(max) + 1);
