@@ -1,41 +1,22 @@
-//단어 공부 - 브론즈1
-//30분 소요
+//단어 공부 -브1
+//11분 소요
 
 let fs = require("fs");
 let path = process.platform === "linux" ? "/dev/stdin" : "input.txt";
-let input = fs.readFileSync(path).toString().trim().toUpperCase().split("");
+let string = fs.readFileSync(path).toString().trim().toUpperCase();
 
-//내 풀이 => 또 복잡함.........
-let set = new Set(input);
-let obj = {};
+const map = {};
 
-for (const char of set) {
-  let count = input.filter((v) => v === char).length; //(On^2)
-  obj[char] = count;
+for (let i = 0; i < string.length; i++) {
+  let char = string[i];
+  map[char] = (map[char] || 0) + 1;
 }
 
-let max = 0;
-for (const char of set) {
-  max = Math.max(max, obj[char]);
-}
-
-let sameValue = Object.values(obj).filter((v) => v === max);
-
+const max = Math.max(...Object.values(map));
 console.log(
-  sameValue.length > 1 ? "?" : Object.keys(obj).find((v) => obj[v] === max)
+  Object.values(map).filter((v) => v === max).length > 1
+    ? "?"
+    : Object.keys(map)
+        .filter((v) => map[v] === max)
+        .join(""),
 );
-
-//습관적으로 set을 먼저 쓰고 다시 filter로 세는 것이 문제
-
-//단순하게 => set 필요없음
-
-let obj2 = {};
-
-for (const char of input) {
-  obj2[char] = (obj2[char] || 0) + 1; //=>어차피 키가 중복되어도 알아서 카운트
-}
-
-let max2 = Math.max(...Object.values(obj2));
-let candidates = Object.keys(obj).filter((key) => obj[key] === max2);
-
-console.log(candidates.length > 1 ? "?" : candidates[0]);
