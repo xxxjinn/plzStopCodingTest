@@ -7,20 +7,17 @@ function solution(n) {
 
   let sum = 1;
   while (sum <= n) {
-    let flag = false;
-
     let num = 0;
     for (let i = sum; i <= n; i++) {
       num += i;
 
       if (num === n) {
-        flag = true;
+        answer++;
         break;
       }
 
       if (num > n) break;
     }
-    if (flag) answer++;
     sum++;
   }
 
